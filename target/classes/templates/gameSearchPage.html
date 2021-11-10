@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Result</title>
+</head>
+<body>
+<p>Search Results:</p>
+<table id = "gametable">
+  <tr>
+    <th>Game Name</th>
+    <th>Platform</th>
+    <th>Release Date</th>
+    <th>Metascore</th>
+    <th>Publisher</th>
+    <th>Metacritics</th>
+    <th>Official Website</th>
+  </tr>
+  <tr>
+    <form action="/gameList"><input type="submit" value="Go Back"></form>
+  </tr>
+</table>
+</body>
+</html>
+
+<script th:inline="javascript">
+  var gameList = [[${gameList}]];
+  var gameTable = document.getElementById("gametable");
+  for (var i=0; i<gameList.length; i++){
+    var tr = document.createElement('tr');
+    for (var j=0; j<5; j++){
+      var td = document.createElement('td');
+      td.innerHTML = gameList[i][j];
+      tr.appendChild(td);
+    }
+    var url_metacritics = gameList[i][5];
+    var url_official = gameList[i][6];
+    var td = document.createElement('td');
+    td.innerHTML = "<a href='"+url_metacritics+"'>Link</a>";
+    tr.appendChild(td);
+    if (url_official){
+      var td = document.createElement('td');
+      td.innerHTML = "<a href='"+url_official+"'>Link</a>";
+      tr.appendChild(td);
+    }
+    gameTable.appendChild(tr);
+  }
+</script>
+
+<style>
+  #gametable{
+    border: 1px solid;
+    margin: auto;
+    width: 1500px;
+  }
+  th {border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;}
+  td {border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;}
+</style>

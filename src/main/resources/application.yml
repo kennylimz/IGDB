@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: project_track_1
+  datasource:
+    name: test  #数据库名
+    url: jdbc:mysql://34.122.80.172:3306/IGDB_1 #url
+    username: mingzhi2  #用户名
+    password: Io786514  #密码
+    driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
+  thymeleaf:
+    cache: false
+  mvc:
+    static-path-pattern: /imgs/**
+  web:
+    resources:
+      static-locations: classpath:/imgs
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  #配置映射文件
+  type-aliases-package: com.example.my_chatroom.bean #配置实体类

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Database</title>
+</head>
+<body>
+<div>
+    <button type="button" onclick="window.location.href='/index'">Main Page</button>
+    <button type="button" onclick="window.location.href='/whichIsBest'">Top Rank!</button>
+</div>
+<form id="filterGame" role="form" method="post" action="/gameFilter">
+    <select name="Platform">
+        <option value="All" selected="selected">All</option>
+        <option value="DS">Nintendo DS</option>
+        <option value="Game Boy Advance">Game Boy Advance</option>
+        <option value="iPad">iPhone/iPad</option>
+        <option value="PC">PC</option>
+        <option value="PS">PlayStation</option>
+        <option value="Switch">Switch</option>
+        <option value="Wii">Wii</option>
+        <option value="Xbox">Xbox</option>
+    </select>
+    <select name="Genre">
+        <option value="All" selected="selected">All</option>
+        <option value="Action">Action</option>
+        <option value="General">General</option>
+        <option value="Action Adventure">Action Adventure</option>
+        <option value="Shooter">Shooter</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+        <option value="Role-Playing">Role-Playing</option>
+        <option value="Arcade">Arcade</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Strategy">Strategy</option>
+        <option value="Sports">Sports</option>
+        <option value="Platformer">Platformer</option>
+        <option value="First-Person">First-Person</option>
+        <option value="3D">3D</option>
+        <option value="2D">2D</option>
+        <option value="Racing">Racing</option>
+        <option value="Simulation">Simulation</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Modern">Modern</option>
+        <option value="Driving">Driving</option>
+    </select>
+    <input type="submit" value="Filter" id="filterBtn">
+</form>
+<form id="searchGame" role="form" method="post" action="/gameSearch">
+    <input type="text" id="searchName" name="searchName" maxlength="15" placeholder="search">
+    <input type="submit" value="Search" id="searchBtn">
+</form>
+<table id = "gametable">
+    <tr>
+        <th>Game Name</th>
+        <th>Platform</th>
+        <th>Release Date</th>
+        <th>Metascore</th>
+        <th>Publisher</th>
+        <th>Metacritics</th>
+        <th>Official Website</th>
+    </tr>
+</table>
+</body>
+</html>
+
+<script th:inline="javascript">
+    var gameList = [[${gameList}]];
+    var gameTable = document.getElementById("gametable");
+    for (var i=0; i<gameList.length; i++){
+        var tr = document.createElement('tr');
+        for (var j=0; j<5; j++){
+            var td = document.createElement('td');
+            td.innerHTML = gameList[i][j];
+            tr.appendChild(td);
+        }
+        var url_metacritics = gameList[i][5];
+        var url_official = gameList[i][6];
+        var td = document.createElement('td');
+        td.innerHTML = "<a href='"+url_metacritics+"'>Link</a>";
+        tr.appendChild(td);
+        if (url_official){
+            var td = document.createElement('td');
+            td.innerHTML = "<a href='"+url_official+"'>Link</a>";
+            tr.appendChild(td);
+        }
+        gameTable.appendChild(tr);
+    }
+</script>
+
+<style>
+    #gametable{
+        border: 1px solid;
+        margin: auto;
+        width: 1500px;
+        alignment: center;
+    }
+    th {border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #dedede;}
+    td {border-width: 1px;padding: 8px;border-style: solid;border-color: #666666;background-color: #ffffff;}
+</style>

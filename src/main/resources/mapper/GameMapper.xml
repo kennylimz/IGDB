@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pt1.mapper.GameMapper">
+    <select id="getInfoFromId" parameterType="int" resultType="com.example.pt1.bean.GameBean">
+        SELECT * FROM Games
+        WHERE GameID = #{id}
+    </select>
+
+    <select id="searchByName" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        SELECT * FROM Games
+        WHERE GameName LIKE "%"#{searchName}"%"
+        ORDER BY MetaScore DESC
+        LIMIT 100
+    </select>
+
+    <select id="selectTop" resultType="com.example.pt1.bean.GameBean">
+        SELECT * FROM Games
+        ORDER BY MetaScore DESC LIMIT 1000
+    </select>
+
+    <select id="selectPlatform" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        SELECT *
+        FROM Games
+        WHERE Platform LIKE "%"#{Platform}"%"
+        ORDER BY MetaScore DESC
+        LIMIT 100
+    </select>
+
+    <select id="selectGenre" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        SELECT DISTINCT *
+        FROM Games
+        WHERE GameName IN (SELECT GameName FROM Genres WHERE Genre=#{Genre})
+        ORDER BY MetaScore DESC
+        LIMIT 100
+    </select>
+
+    <select id="filterGame" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        SELECT DISTINCT *
+        FROM Games
+        WHERE (Platform LIKE "%"#{Platform}"%") AND (GameName IN (SELECT GameName FROM Genres WHERE Genre=#{Genre}))
+        ORDER BY MetaScore DESC
+        LIMIT 100
+    </select>
+
+    <select id="selectTopGame" resultType="com.example.pt1.bean.TopGame">
+        SELECT GameName as GameName, AVG(MetaScore) as AvgScore
+        FROM Games
+        GROUP BY GameName
+        ORDER BY AvgScore DESC
+        LIMIT 100
+    </select>
+
+    <select id="selectTopPub" resultType="com.example.pt1.bean.TopGame">
+        SELECT Publisher as GameName, AVG(MetaScore) as AvgScore
+        FROM Games
+        GROUP BY Publisher
+        HAVING COUNT(*)&gt;=10
+        ORDER BY AvgScore DESC
+        LIMIT 100
+    </select>
+</mapper>
