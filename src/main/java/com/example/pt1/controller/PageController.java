@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +94,7 @@ public class PageController {
     public String gameList(Model model){
         List<GameBean> gameBeanList= gameServiceImpl.selectTop();
         int cnt = gameBeanList.size();
-        String[][] gameArray = new String[cnt][7];
+        String[][] gameArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){
             gameArray[i][0] = gameBeanList.get(i).getGameName();
             gameArray[i][1] = gameBeanList.get(i).getPlatform();
@@ -102,8 +103,10 @@ public class PageController {
             gameArray[i][4] = gameBeanList.get(i).getPublisher();
             gameArray[i][5] = gameBeanList.get(i).getMetacriticURL();
             gameArray[i][6] = gameBeanList.get(i).getOfficialURL();
+            gameArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(gameArray[i][0]);
         }
         model.addAttribute("gameList", gameArray);
+        model.addAttribute("curUserName", curUserBean.getNickname());
         return "gameList";
     }
 
@@ -185,7 +188,7 @@ public class PageController {
     public String gameSearch(String searchName, Model model){
         List<GameBean> gameBeanList= gameServiceImpl.searchGameName(searchName);
         int cnt = gameBeanList.size();
-        String[][] gameArray = new String[cnt][7];
+        String[][] gameArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){
             gameArray[i][0] = gameBeanList.get(i).getGameName();
             gameArray[i][1] = gameBeanList.get(i).getPlatform();
@@ -194,6 +197,7 @@ public class PageController {
             gameArray[i][4] = gameBeanList.get(i).getPublisher();
             gameArray[i][5] = gameBeanList.get(i).getMetacriticURL();
             gameArray[i][6] = gameBeanList.get(i).getOfficialURL();
+            gameArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(gameArray[i][0]);
         }
         model.addAttribute("gameList", gameArray);
         return "gameSearchPage";
@@ -203,7 +207,7 @@ public class PageController {
     public String gameFilter(String Platform, String Genre, Model model){
         List<GameBean> gameBeanList = gameServiceImpl.filterGame(Platform, Genre);
         int cnt = gameBeanList.size();
-        String[][] gameArray = new String[cnt][7];
+        String[][] gameArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){
             gameArray[i][0] = gameBeanList.get(i).getGameName();
             gameArray[i][1] = gameBeanList.get(i).getPlatform();
@@ -212,8 +216,20 @@ public class PageController {
             gameArray[i][4] = gameBeanList.get(i).getPublisher();
             gameArray[i][5] = gameBeanList.get(i).getMetacriticURL();
             gameArray[i][6] = gameBeanList.get(i).getOfficialURL();
+            gameArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(gameArray[i][0]);
         }
         model.addAttribute("gameList", gameArray);
         return "gameSearchPage";
+    }
+
+    @RequestMapping(value = "/reviews")
+    public String gameReview(@RequestParam(value="gameid") String gameID, Model model){
+        int pageID = Integer.parseInt(gameID);
+        String GameName = gameServiceImpl.getReviewName(pageID);
+        model.addAttribute("GameName", GameName);
+        System.out.println(GameName);
+        String Publisher = gameServiceImpl.getReviewPub(pageID);
+        model.addAttribute("Publisher", Publisher);
+        return "reviewPage";
     }
 }

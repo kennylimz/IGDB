@@ -15,7 +15,7 @@
 
     <select id="selectTop" resultType="com.example.pt1.bean.GameBean">
         SELECT * FROM Games
-        ORDER BY MetaScore DESC LIMIT 1000
+        ORDER BY MetaScore DESC LIMIT 100
     </select>
 
     <select id="selectPlatform" parameterType="string" resultType="com.example.pt1.bean.GameBean">
@@ -57,5 +57,23 @@
         HAVING COUNT(*)&gt;=10
         ORDER BY AvgScore DESC
         LIMIT 100
+    </select>
+
+    <select id="getReviewID" resultType="int">
+        SELECT PageID
+        FROM GamePages
+        WHERE GameName=#{GameName}
+    </select>
+
+    <select id="getReviewPub" resultType="string">
+        SELECT Publisher
+        FROM GamePages
+        WHERE PageID=#{PageID}
+    </select>
+
+    <select id="getReviewName" resultType="string">
+        SELECT GameName
+        FROM GamePages
+        WHERE PageID=#{PageID}
     </select>
 </mapper>

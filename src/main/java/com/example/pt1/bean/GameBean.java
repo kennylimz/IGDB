@@ -84,5 +84,6 @@ public class GameBean {
     public void setOfficialURL(String officialURL) {
         OfficialURL = officialURL;
     }
+
 }
 

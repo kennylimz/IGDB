@@ -9,6 +9,9 @@
     <button type="button" onclick="window.location.href='/index'">Main Page</button>
     <button type="button" onclick="window.location.href='/whichIsBest'">Top Rank!</button>
 </div>
+<div>
+    <p id="welcome"></p>
+</div>
 <form id="filterGame" role="form" method="post" action="/gameFilter">
     <select name="Platform">
         <option value="All" selected="selected">All</option>
@@ -59,12 +62,15 @@
         <th>Publisher</th>
         <th>Metacritics</th>
         <th>Official Website</th>
+        <th>User Reviews</th>
     </tr>
 </table>
 </body>
 </html>
 
 <script th:inline="javascript">
+    var welcome = document.getElementById("welcome");
+    welcome.innerText = "Hello, "+ [[${curUserName}]]+"!";
     var gameList = [[${gameList}]];
     var gameTable = document.getElementById("gametable");
     for (var i=0; i<gameList.length; i++){
@@ -76,14 +82,21 @@
         }
         var url_metacritics = gameList[i][5];
         var url_official = gameList[i][6];
+        var url_review = gameList[i][7];
         var td = document.createElement('td');
         td.innerHTML = "<a href='"+url_metacritics+"'>Link</a>";
         tr.appendChild(td);
+        var td = document.createElement('td');
         if (url_official){
-            var td = document.createElement('td');
             td.innerHTML = "<a href='"+url_official+"'>Link</a>";
             tr.appendChild(td);
         }
+        else{
+            tr.appendChild(td);
+        }
+        var td = document.createElement('td');
+        td.innerHTML = "<a href='"+url_review+"'>Link</a>";
+        tr.appendChild(td);
         gameTable.appendChild(tr);
     }
 </script>

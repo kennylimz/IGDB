@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Game Review</title>
+    </head>
+    <body>
+        <p id="firstline"></p>
+    </body>
+</html>
+
+<script th:inline="javascript">
+    var gameName = [[${GameName}]];
+    var publisher = [[${Publisher}]];
+    var title = document.getElementById("firstline");
+    title.innerText = gameName+" by "+publisher;
+</script>
+
+<style>
+</style>

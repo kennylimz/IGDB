@@ -58,4 +58,20 @@ public class GameServiceImpl implements GameService{
     public List<TopGame> selectTopPublisher() {
         return gameMapper.selectTopPub();
     }
+
+    @Override
+    public int getReviewID(String GameName) {
+        return gameMapper.getReviewID(GameName);
+    }
+
+    @Override
+    public String getReviewPub(int pageID) {
+        return gameMapper.getReviewPub(pageID);
+    }
+
+    @Override
+    public String getReviewName(int pageID) {
+        return gameMapper.getReviewName(pageID);
+    }
+
 }

@@ -18,4 +18,10 @@ public interface GameService {
     List<TopGame> selectTopGame();
 
     List<TopGame> selectTopPublisher();
+
+    int getReviewID(String GameName);
+
+    String getReviewPub(int pageID);
+
+    String getReviewName(int pageID);
 }

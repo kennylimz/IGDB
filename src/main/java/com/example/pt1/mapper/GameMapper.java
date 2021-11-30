@@ -25,4 +25,10 @@ public interface GameMapper {
     List<TopGame> selectTopGame();
 
     List<TopGame> selectTopPub();
+
+    int getReviewID(@Param("GameName") String GameName);
+
+    String getReviewPub(@Param("PageID") int pageID);
+
+    String getReviewName(int pageID);
 }

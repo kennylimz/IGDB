@@ -5,6 +5,9 @@
   <title>Search Result</title>
 </head>
 <body>
+<div>
+  <p id="welcome"></p>
+</div>
 <p>Search Results:</p>
 <table id = "gametable">
   <tr>
@@ -15,6 +18,7 @@
     <th>Publisher</th>
     <th>Metacritics</th>
     <th>Official Website</th>
+    <th>User Review</th>
   </tr>
   <tr>
     <form action="/gameList"><input type="submit" value="Go Back"></form>
@@ -24,6 +28,8 @@
 </html>
 
 <script th:inline="javascript">
+  var welcome = document.getElementById("welcome");
+  welcome.innerText = "Hello, "+ [[${curUserName}]]+"!";
   var gameList = [[${gameList}]];
   var gameTable = document.getElementById("gametable");
   for (var i=0; i<gameList.length; i++){
@@ -35,14 +41,21 @@
     }
     var url_metacritics = gameList[i][5];
     var url_official = gameList[i][6];
+    var url_review = gameList[i][7];
     var td = document.createElement('td');
     td.innerHTML = "<a href='"+url_metacritics+"'>Link</a>";
     tr.appendChild(td);
+    var td = document.createElement('td');
     if (url_official){
-      var td = document.createElement('td');
       td.innerHTML = "<a href='"+url_official+"'>Link</a>";
       tr.appendChild(td);
     }
+    else{
+      tr.appendChild(td);
+    }
+    var td = document.createElement('td');
+    td.innerHTML = "<a href='"+url_review+"'>Link</a>";
+    tr.appendChild(td);
     gameTable.appendChild(tr);
   }
 </script>
