@@ -30,4 +30,6 @@ public interface GameService {
     List<GameBean> getGames(String Genre);
 
     String getGenres(int id);
+
+    String getAvgMetaScore(String gameName);
 }

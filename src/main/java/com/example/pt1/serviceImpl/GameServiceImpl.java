@@ -97,4 +97,9 @@ public class GameServiceImpl implements GameService{
         return recommendMapper.getGenre(id);
     }
 
+    @Override
+    public String getAvgMetaScore(String gameName) {
+        return String.valueOf(gameMapper.getAvgMetaScore(gameName));
+    }
+
 }

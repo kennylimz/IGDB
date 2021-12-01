@@ -260,18 +260,28 @@ public class PageController {
         model.addAttribute("Publisher", Publisher);
         String AvgScore = gameServiceImpl.getAvgScore(pageID);
         model.addAttribute("AvgScore", AvgScore);
+        String AvgMetaScore = gameServiceImpl.getAvgMetaScore(GameName);
+        model.addAttribute("AvgMetaScore", AvgMetaScore);
 
         List<ReviewBean> reviewList = userServiceImpl.getReviews(GameName);
         int cnt = reviewList.size();
         String[][] reviewArray = new String[cnt][3];
         for (int i=0; i<cnt; i++){
-            reviewArray[i][0] = reviewList.get(i).getUserName();
+            int commentorID = reviewList.get(i).getUserID();
+            reviewArray[i][0] = userServiceImpl.searchId(commentorID).getNickname();
             reviewArray[i][1] = String.valueOf(reviewList.get(i).getScore());
             reviewArray[i][2] = reviewList.get(i).getComment();
         }
         model.addAttribute("reviewList", reviewArray);
-
+        model.addAttribute("UserId", curUserBean.getId());
         return "reviewPage";
+    }
+
+    @PostMapping(value = "/createReview")
+    public String createReview(String userId, String gameName, String newScore, String newComment, Model model){
+        userServiceImpl.addReview(Integer.parseInt(userId), gameName, Integer.parseInt(newScore), newComment);
+        int gameID = gameServiceImpl.getReviewID(gameName);
+        return gameReview(String.valueOf(gameID), model);
     }
 
 }

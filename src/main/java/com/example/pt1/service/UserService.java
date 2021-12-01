@@ -24,4 +24,6 @@ public interface UserService {
     void addHistory(int userID, String gameID);
 
     List<ReviewBean> getReviews(String gameName);
+
+    void addReview(int userId, String gameName, int newScore, String newComment);
 }

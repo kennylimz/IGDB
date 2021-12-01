@@ -9,6 +9,7 @@
         select *
         from Reviews
         where GameName=#{gamename}
+        order by ReviewID DESC
     </select>
 
 </mapper>

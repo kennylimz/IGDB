@@ -2,14 +2,14 @@ package com.example.pt1.bean;
 
 public class ReviewBean {
     private int ReviewID;
-    private String UserName;
+    private int UserID;
     private String GameName;
     private int Score;
     private String Comment;
 
-    public ReviewBean(int reviewID, String userName, String gameName, int score, String comment) {
+    public ReviewBean(int reviewID, int userID, String gameName, int score, String comment) {
         ReviewID = reviewID;
-        UserName = userName;
+        UserID = userID;
         GameName = gameName;
         Score = score;
         Comment = comment;
@@ -23,12 +23,12 @@ public class ReviewBean {
         ReviewID = reviewID;
     }
 
-    public String getUserName() {
-        return UserName;
+    public int getUserID() {
+        return UserID;
     }
 
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setUserID(int userID) {
+        UserID = userID;
     }
 
     public String getGameName() {

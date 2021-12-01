@@ -26,7 +26,9 @@ public interface GameMapper {
 
     String getReviewPub(@Param("PageID") int pageID);
 
-    String getReviewName(int pageID);
+    String getReviewName(@Param("PageID") int pageID);
 
-    float getAvgScore(int pageID);
+    float getAvgScore(@Param("PageID") int pageID);
+
+    float getAvgMetaScore(@Param("GameName") String gameName);
 }

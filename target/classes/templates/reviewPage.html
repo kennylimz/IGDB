@@ -8,17 +8,80 @@
         <form action="/gameList"><input type="submit" value="Go Back"></form>
         <p id="firstline"></p>
         <p id="avgscore"></p>
+        <p id="avgmetascore"></p>
+        <form id="createReview" role="form" method="post" action="/createReview">
+            <input id="userId" name="userId" type="text" hidden="hidden">
+            <input id="gameName" name="gameName" type="text" hidden="hidden">
+            <select name="newScore">
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="0">0</option>
+            </select>
+            <br/>
+            <input id="newComment" name="newComment" maxlength="250" placeholder="Write your comment" type="text">
+            <br/>
+            <input id="commit" type="submit" value="Submit">
+        </form>
+        <hr/>
+        <table id="reviewTable"></table>
     </body>
 </html>
 
 <script th:inline="javascript">
-    var gameName = [[${GameName}]];
-    var publisher = [[${Publisher}]];
-    var title = document.getElementById("firstline");
-    title.innerText = gameName+" by "+publisher;
-    var avgscore = document.getElementById("avgscore");
-    avgscore.innerText = "Average User Score: "+[[${AvgScore}]];
+    document.getElementById("firstline").innerText = [[${GameName}]]+" by "+[[${Publisher}]];
+    document.getElementById("avgscore").innerText = "Average User Score: "+[[${AvgScore}]];
+    document.getElementById("avgmetascore").innerText = "Average MetaScore: "+[[${AvgMetaScore}]];
+    document.getElementById("userId").value = [[${UserId}]];
+    document.getElementById("gameName").value = [[${GameName}]];
+
+    var reviewList = [[${reviewList}]];
+    var reviewTable = document.getElementById("reviewTable");
+    for (var i=0; i<reviewList.length; i++){
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        td.innerHTML = reviewList[i][0]+":";
+        tr.appendChild(td);
+        var td = document.createElement('td');
+        tr.appendChild(td);
+        tr.appendChild(td);
+        td.innerHTML = "Score: "+reviewList[i][1]+"/10";
+        tr.appendChild(td);
+        reviewTable.appendChild(tr);
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+        td.colSpan=6;
+        td.innerHTML = reviewList[i][2];
+        tr.appendChild(td);
+        reviewTable.appendChild(tr);
+        var tr = document.createElement('tr');
+        reviewTable.appendChild(tr);
+    }
 </script>
 
 <style>
+    #newComment{
+        border: 1px solid;
+        width: 500px;
+        height: 100px;
+        overflow: scroll;
+    }
+    #reviewTable{
+        width: 1200px;
+        alignment: center;
+    }
+    tr{
+        border: 1px solid;
+        height: 20px;
+    }
+    td{
+        width: 200px;
+    }
 </style>

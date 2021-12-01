@@ -66,4 +66,10 @@
         FROM GamePages
         WHERE PageID=#{PageID}
     </select>
+
+    <select id="getAvgMetaScore" parameterType="string" resultType="float">
+        SELECT AVG(MetaScore)
+        FROM Games
+        WHERE GameName=#{GameName}
+    </select>
 </mapper>
