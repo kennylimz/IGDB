@@ -35,18 +35,19 @@ public class GameServiceImpl implements GameService{
 
     @Override
     public List<GameBean> filterGame(String Platform, String Genre) {
-        if (Platform.equals("All") && Genre.equals("All")){
-            return gameMapper.selectTop();
-        }
-        else if (Platform.equals("All")){
-            return gameMapper.selectGenre(Genre);
-        }
-        else if (Genre.equals("All")){
-            return gameMapper.selectPlatform(Platform);
-        }
-        else{
-            return gameMapper.filterGame(Platform, Genre);
-        }
+//        if (Platform.equals("All") && Genre.equals("All")){
+//            return gameMapper.selectTop();
+//        }
+//        else if (Platform.equals("All")){
+//            return gameMapper.selectGenre(Genre);
+//        }
+//        else if (Genre.equals("All")){
+//            return gameMapper.selectPlatform(Platform);
+//        }
+//        else{
+//            return gameMapper.filterGame(Platform, Genre);
+//        }
+        return gameMapper.filterGame(Platform, Genre);
     }
 
     @Override
@@ -72,6 +73,17 @@ public class GameServiceImpl implements GameService{
     @Override
     public String getReviewName(int pageID) {
         return gameMapper.getReviewName(pageID);
+    }
+
+    @Override
+    public String getAvgScore(int pageID) {
+        float AvgScore = gameMapper.getAvgScore(pageID);
+        if (AvgScore<0){
+            return "Not Applicable";
+        }
+        else{
+            return String.valueOf(AvgScore);
+        }
     }
 
 }

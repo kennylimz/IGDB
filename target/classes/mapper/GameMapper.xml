@@ -76,4 +76,10 @@
         FROM GamePages
         WHERE PageID=#{PageID}
     </select>
+
+    <select id="getAvgScore" resultType="float">
+        SELECT IFNULL(AvgScore, -1)
+        FROM GamePages
+        WHERE PageID=#{PageID}
+    </select>
 </mapper>

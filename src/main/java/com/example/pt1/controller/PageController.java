@@ -230,6 +230,8 @@ public class PageController {
         System.out.println(GameName);
         String Publisher = gameServiceImpl.getReviewPub(pageID);
         model.addAttribute("Publisher", Publisher);
+        String AvgScore = gameServiceImpl.getAvgScore(pageID);
+        model.addAttribute("AvgScore", AvgScore);
         return "reviewPage";
     }
 }

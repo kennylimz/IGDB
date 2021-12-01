@@ -24,4 +24,6 @@ public interface GameService {
     String getReviewPub(int pageID);
 
     String getReviewName(int pageID);
+
+    String getAvgScore(int pageID);
 }

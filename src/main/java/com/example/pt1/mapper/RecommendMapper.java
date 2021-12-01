@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface GameMapper {
+public interface RecommendMapper {
 
     GameBean getInfoFromId(@Param("id") int id);
 
@@ -26,11 +26,5 @@ public interface GameMapper {
 
     List<TopGame> selectTopPub();
 
-    int getReviewID(@Param("GameName") String GameName);
-
-    String getReviewPub(@Param("PageID") int pageID);
-
-    String getReviewName(int pageID);
-
-    float getAvgScore(int pageID);
+//    GenreCount getGenre();
 }
