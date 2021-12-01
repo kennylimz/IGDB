@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.pt1.mapper.RecommendMapper">
-    <select id="getGenre" parameterType="int" resultType="string">
-        select Genre
+    <select id="getGenre" parameterType="int" resultType="com.example.pt1.bean.GenreCount">
+        select Genre, count(Genre)
         from Genres natural join History
         where UserID = #{userid}
         group by Genre
         order by count(Genre) DESC
-        limit 1
+        limit 2
     </select>
 
     <select id="getGames" parameterType="string" resultType="com.example.pt1.bean.GameBean">

@@ -17,4 +17,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #配置映射文件
-  type-aliases-package: com.example.my_chatroom.bean #配置实体类
+  type-aliases-package: com.example.pt1.bean #配置实体类

@@ -1,6 +1,7 @@
 package com.example.pt1.service;
 
 import com.example.pt1.bean.GameBean;
+import com.example.pt1.bean.GenreCount;
 import com.example.pt1.bean.TopGame;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public interface GameService {
 
     List<GameBean> getGames(String Genre);
 
-    String getGenres(int id);
+    List<GenreCount> getGenres(int id);
 
     String getAvgMetaScore(String gameName);
 }

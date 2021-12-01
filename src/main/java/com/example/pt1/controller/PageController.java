@@ -1,9 +1,6 @@
 package com.example.pt1.controller;
 
-import com.example.pt1.bean.GameBean;
-import com.example.pt1.bean.ReviewBean;
-import com.example.pt1.bean.TopGame;
-import com.example.pt1.bean.UserBean;
+import com.example.pt1.bean.*;
 import com.example.pt1.serviceImpl.GameServiceImpl;
 import com.example.pt1.serviceImpl.UserServiceImpl;
 import freemarker.ext.dom.NodeModel;
@@ -109,11 +106,8 @@ public class PageController {
         model.addAttribute("gameList", gameArray);
         model.addAttribute("curUserName", curUserBean.getNickname());
 
-        String Genre = gameServiceImpl.getGenres(curUserBean.getId());
-        if (Genre == null) {
-            Genre = "Action";
-        }
-        List<GameBean> recommendList= gameServiceImpl.getGames(Genre);
+        List<GenreCount> curGenre = gameServiceImpl.getGenres(curUserBean.getId());
+        List<GameBean> recommendList= gameServiceImpl.getGames(curGenre.get(0).Genrename());
         cnt = recommendList.size();
         String[][] recomendArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){
@@ -127,6 +121,7 @@ public class PageController {
             recomendArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(recomendArray[i][0]);
         }
         model.addAttribute("recommendList", recomendArray);
+
         return "gameList";
     }
 

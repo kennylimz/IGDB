@@ -1,6 +1,7 @@
 package com.example.pt1.serviceImpl;
 
 import com.example.pt1.bean.GameBean;
+import com.example.pt1.bean.GenreCount;
 import com.example.pt1.bean.TopGame;
 import com.example.pt1.mapper.GameMapper;
 import com.example.pt1.mapper.RecommendMapper;
@@ -93,7 +94,7 @@ public class GameServiceImpl implements GameService{
     }
 
     @Override
-    public String getGenres(int id) {
+    public List<GenreCount> getGenres(int id) {
         return recommendMapper.getGenre(id);
     }
 
