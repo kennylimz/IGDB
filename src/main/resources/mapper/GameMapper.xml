@@ -37,7 +37,7 @@
     <select id="filterGame" parameterType="string" resultType="com.example.pt1.bean.GameBean">
         SELECT DISTINCT *
         FROM Games
-        WHERE (Platform LIKE "%"#{Platform}"%") AND (GameName IN (SELECT GameName FROM Genres WHERE Genre=#{Genre}))
+        WHERE ((Platform LIKE "%"#{Platform}"%") OR (#{Platform} = "All")) AND ((GameName IN (SELECT GameName FROM Genres WHERE Genre=#{Genre})) OR (#{Genre} = "All"))
         ORDER BY MetaScore DESC
         LIMIT 100
     </select>
