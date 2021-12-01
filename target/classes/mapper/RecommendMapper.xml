@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pt1.mapper.RecommendMapper">
+    <select id="getGenre" parameterType="string" resultType="com.example.pt1.bean.GenreCount">
+        select Genre,count(Genre) as genre_counts
+        from Genres natural join History
+        where UserID = #{userid}
+        group by Genre
+        order by genre_counts DESC
+        limit 2
+    </select>
+
+    <select id="getGames" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        select GameID, GameName, Platform, ReleaseDate, MetaScore, Publisher, MetacriticU, OfficialURL
+        from Games natural join Genres
+        where Genre = #{genre}
+        order by MetaScore DESC
+        limit 5
+    </select>
+
+<!--    <insert id="AddHistory">-->
+<!--        INSERT INTO History (UserID, GameName, Genre) VALUES ()-->
+<!--    </insert>-->
+</mapper>

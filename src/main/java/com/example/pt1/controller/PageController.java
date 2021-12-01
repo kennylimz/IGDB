@@ -107,6 +107,21 @@ public class PageController {
         }
         model.addAttribute("gameList", gameArray);
         model.addAttribute("curUserName", curUserBean.getNickname());
+
+        List<GameBean> recommendList= gameServiceImpl.getGames("Action");
+        cnt = recommendList.size();
+        String[][] recomendArray = new String[cnt][8];
+        for (int i=0; i<cnt; i++){
+            recomendArray[i][0] = recommendList.get(i).getGameName();
+            recomendArray[i][1] = recommendList.get(i).getPlatform();
+            recomendArray[i][2] = recommendList.get(i).getReleaseDate();
+            recomendArray[i][3] = String.valueOf(recommendList.get(i).getMetaScore());
+            recomendArray[i][4] = recommendList.get(i).getPublisher();
+            recomendArray[i][5] = recommendList.get(i).getMetacriticURL();
+            recomendArray[i][6] = recommendList.get(i).getOfficialURL();
+            recomendArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(recomendArray[i][0]);
+        }
+        model.addAttribute("recommendList", recomendArray);
         return "gameList";
     }
 
@@ -234,4 +249,5 @@ public class PageController {
         model.addAttribute("AvgScore", AvgScore);
         return "reviewPage";
     }
+
 }

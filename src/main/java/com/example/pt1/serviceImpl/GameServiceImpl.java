@@ -4,6 +4,7 @@ import com.example.pt1.bean.GameBean;
 import com.example.pt1.bean.TopGame;
 import com.example.pt1.bean.UserBean;
 import com.example.pt1.mapper.GameMapper;
+import com.example.pt1.mapper.RecommendMapper;
 import com.example.pt1.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class GameServiceImpl implements GameService{
 
     @Autowired
     private GameMapper gameMapper;
+
+    @Autowired
+    private RecommendMapper recommendMapper;
 
     @Override
     public GameBean searchGameId(int id) {
@@ -84,6 +88,11 @@ public class GameServiceImpl implements GameService{
         else{
             return String.valueOf(AvgScore);
         }
+    }
+
+    @Override
+    public List<GameBean> getGames(String Genre) {
+        return recommendMapper.getGames(Genre);
     }
 
 }

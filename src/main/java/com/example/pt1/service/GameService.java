@@ -26,4 +26,6 @@ public interface GameService {
     String getReviewName(int pageID);
 
     String getAvgScore(int pageID);
+
+    List<GameBean> getGames(String Genre);
 }
