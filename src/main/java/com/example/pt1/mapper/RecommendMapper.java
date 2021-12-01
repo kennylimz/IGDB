@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface RecommendMapper {
 
-    List<GenreCount> getGenre();
+    String getGenre(@Param("userid") int UserID);
 
     List<GameBean> getGames(@Param("genre") String Genre);
 

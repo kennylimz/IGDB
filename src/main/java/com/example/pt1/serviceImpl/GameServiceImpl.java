@@ -2,16 +2,13 @@ package com.example.pt1.serviceImpl;
 
 import com.example.pt1.bean.GameBean;
 import com.example.pt1.bean.TopGame;
-import com.example.pt1.bean.UserBean;
 import com.example.pt1.mapper.GameMapper;
 import com.example.pt1.mapper.RecommendMapper;
 import com.example.pt1.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService{
@@ -93,6 +90,11 @@ public class GameServiceImpl implements GameService{
     @Override
     public List<GameBean> getGames(String Genre) {
         return recommendMapper.getGames(Genre);
+    }
+
+    @Override
+    public String getGenres(int id) {
+        return recommendMapper.getGenre(id);
     }
 
 }

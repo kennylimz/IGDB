@@ -108,7 +108,11 @@ public class PageController {
         model.addAttribute("gameList", gameArray);
         model.addAttribute("curUserName", curUserBean.getNickname());
 
-        List<GameBean> recommendList= gameServiceImpl.getGames("Action");
+        String Genre = gameServiceImpl.getGenres(curUserBean.getId());
+        if (Genre == null) {
+            Genre = "Action";
+        }
+        List<GameBean> recommendList= gameServiceImpl.getGames(Genre);
         cnt = recommendList.size();
         String[][] recomendArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){

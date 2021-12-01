@@ -28,4 +28,6 @@ public interface GameService {
     String getAvgScore(int pageID);
 
     List<GameBean> getGames(String Genre);
+
+    String getGenres(int id);
 }
