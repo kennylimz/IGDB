@@ -1,6 +1,9 @@
 package com.example.pt1.serviceImpl;
 
+import com.example.pt1.bean.ReviewBean;
 import com.example.pt1.bean.UserBean;
+import com.example.pt1.mapper.GameMapper;
+import com.example.pt1.mapper.ReviewMapper;
 import com.example.pt1.mapper.UserMapper;
 import com.example.pt1.mapper.RecommendMapper;
 import com.example.pt1.service.UserService;
@@ -19,6 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RecommendMapper recommendMapper;
+
+    @Autowired
+    private GameMapper gameMapper;
+
+    @Autowired
+    private ReviewMapper reviewMapper;
 
     @Override
     public UserBean loginIn(String username, String password) {
@@ -81,6 +90,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addHistory(int userID, String gameName) {
         recommendMapper.addHistory(userID, gameName);
+    }
+
+    @Override
+    public List<ReviewBean> getReviews(String gameName) {
+        return reviewMapper.getReviews(gameName);
     }
 }
 

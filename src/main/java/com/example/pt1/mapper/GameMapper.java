@@ -18,10 +18,6 @@ public interface GameMapper {
 
     List<GameBean> filterGame(@Param("Platform") String Platform, @Param("Genre") String Genre);
 
-    List<GameBean> selectPlatform(@Param("Platform") String Platform);
-
-    List<GameBean> selectGenre(@Param("Genre") String genre);
-
     List<TopGame> selectTopGame();
 
     List<TopGame> selectTopPub();

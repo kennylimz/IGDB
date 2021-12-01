@@ -1,5 +1,6 @@
 package com.example.pt1.service;
 
+import com.example.pt1.bean.ReviewBean;
 import com.example.pt1.bean.UserBean;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserService {
     List<UserBean> searchName(String searchName);
 
     void addHistory(int userID, String gameID);
+
+    List<ReviewBean> getReviews(String gameName);
 }

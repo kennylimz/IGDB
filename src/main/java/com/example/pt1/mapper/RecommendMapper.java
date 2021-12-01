@@ -1,6 +1,5 @@
 package com.example.pt1.mapper;
 
-import com.example.pt1.bean.GenreCount;
 import com.example.pt1.bean.GameBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

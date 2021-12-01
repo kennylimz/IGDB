@@ -1,6 +1,7 @@
 package com.example.pt1.controller;
 
 import com.example.pt1.bean.GameBean;
+import com.example.pt1.bean.ReviewBean;
 import com.example.pt1.bean.TopGame;
 import com.example.pt1.bean.UserBean;
 import com.example.pt1.serviceImpl.GameServiceImpl;
@@ -259,6 +260,17 @@ public class PageController {
         model.addAttribute("Publisher", Publisher);
         String AvgScore = gameServiceImpl.getAvgScore(pageID);
         model.addAttribute("AvgScore", AvgScore);
+
+        List<ReviewBean> reviewList = userServiceImpl.getReviews(GameName);
+        int cnt = reviewList.size();
+        String[][] reviewArray = new String[cnt][3];
+        for (int i=0; i<cnt; i++){
+            reviewArray[i][0] = reviewList.get(i).getUserName();
+            reviewArray[i][1] = String.valueOf(reviewList.get(i).getScore());
+            reviewArray[i][2] = reviewList.get(i).getComment();
+        }
+        model.addAttribute("reviewList", reviewArray);
+
         return "reviewPage";
     }
 

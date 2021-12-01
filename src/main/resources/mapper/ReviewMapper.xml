@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.pt1.mapper.ReviewMapper">
+    <insert id="addReview">
+        INSERT INTO Reviews (UserID, GameName, Score, Comment) VALUES (#{userid}, #{gamename}, #{score}, #{comment})
+    </insert>
+
+    <select id="getReviews" parameterType="string" resultType="com.example.pt1.bean.ReviewBean">
+        select *
+        from Reviews
+        where GameName=#{gamename}
+    </select>
+
+</mapper>
