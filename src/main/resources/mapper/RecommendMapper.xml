@@ -20,7 +20,7 @@
         limit 5
     </select>
 
-    <!--    <insert id="AddHistory">-->
-    <!--        INSERT INTO History (UserID, GameName, Genre) VALUES ()-->
-    <!--    </insert>-->
+    <insert id="addHistory">
+        INSERT INTO History (UserID, GameName) VALUES (#{userid}, #{gamename})
+    </insert>
 </mapper>

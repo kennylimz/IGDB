@@ -2,6 +2,7 @@ package com.example.pt1.serviceImpl;
 
 import com.example.pt1.bean.UserBean;
 import com.example.pt1.mapper.UserMapper;
+import com.example.pt1.mapper.RecommendMapper;
 import com.example.pt1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RecommendMapper recommendMapper;
 
     @Override
     public UserBean loginIn(String username, String password) {
@@ -72,6 +76,11 @@ public class UserServiceImpl implements UserService {
             userBeanList.add(userMapper.getInfoFromId(i));
         }
         return userBeanList;
+    }
+
+    @Override
+    public void addHistory(int userID, String gameName) {
+        recommendMapper.addHistory(userID, gameName);
     }
 }
 

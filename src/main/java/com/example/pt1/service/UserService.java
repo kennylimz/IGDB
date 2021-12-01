@@ -19,4 +19,6 @@ public interface UserService {
     void editById(int id, String edit_un, String edit_pw, String edit_nn);
 
     List<UserBean> searchName(String searchName);
+
+    void addHistory(int userID, String gameID);
 }

@@ -244,6 +244,14 @@ public class PageController {
     @RequestMapping(value = "/reviews")
     public String gameReview(@RequestParam(value="gameid") String gameID, Model model){
         int pageID = Integer.parseInt(gameID);
+        String gameName = gameServiceImpl.getReviewName(pageID);
+        if (curUserBean == null){
+            System.out.println("Guest");
+        }
+        else{
+            System.out.println(curUserBean.getNickname());
+            userServiceImpl.addHistory(curUserBean.getId(), gameName);
+        }
         String GameName = gameServiceImpl.getReviewName(pageID);
         model.addAttribute("GameName", GameName);
         System.out.println(GameName);

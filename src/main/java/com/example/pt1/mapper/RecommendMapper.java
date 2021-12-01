@@ -14,4 +14,5 @@ public interface RecommendMapper {
 
     List<GameBean> getGames(@Param("genre") String Genre);
 
+    void addHistory(@Param("userid") int userID, @Param("gamename") String gameName);
 }
