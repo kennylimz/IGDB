@@ -20,6 +20,10 @@
         limit 5
     </select>
 
+    <select id="getRecommend" parameterType="int" resultType="string">
+        call Mix(#{userid})
+    </select>
+
     <insert id="addHistory">
         INSERT INTO History (UserID, GameName) VALUES (#{userid}, #{gamename})
     </insert>

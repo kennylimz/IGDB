@@ -101,5 +101,10 @@ public class UserServiceImpl implements UserService {
     public void addReview(int userId, String gameName, int newScore, String newComment) {
         reviewMapper.addReview(userId, gameName, newScore, newComment);
     }
+
+    @Override
+    public List<String> getRecommend(int UserId) {
+        return recommendMapper.getRecommend(UserId);
+    }
 }
 

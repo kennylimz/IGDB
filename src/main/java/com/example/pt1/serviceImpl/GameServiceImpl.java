@@ -9,6 +9,7 @@ import com.example.pt1.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -101,6 +102,19 @@ public class GameServiceImpl implements GameService{
     @Override
     public String getAvgMetaScore(String gameName) {
         return String.valueOf(gameMapper.getAvgMetaScore(gameName));
+    }
+
+    @Override
+    public List<GameBean> getGameBeans(List<String> recommendNames) {
+        String tempName;
+        GameBean tempBean;
+        List<GameBean> outputList = new ArrayList<>();
+        for (int i=0; i<recommendNames.size(); i++){
+            tempName = recommendNames.get(i);
+            tempBean = gameMapper.selectBeanFromName(tempName);
+            outputList.add(tempBean);
+        };
+        return outputList;
     }
 
 }

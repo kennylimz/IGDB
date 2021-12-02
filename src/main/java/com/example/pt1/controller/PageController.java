@@ -106,8 +106,8 @@ public class PageController {
         model.addAttribute("gameList", gameArray);
         model.addAttribute("curUserName", curUserBean.getNickname());
 
-        List<GenreCount> curGenre = gameServiceImpl.getGenres(curUserBean.getId());
-        List<GameBean> recommendList= gameServiceImpl.getGames(curGenre.get(0).Genrename());
+        List<String> recommendNames = userServiceImpl.getRecommend(curUserBean.getId());
+        List<GameBean> recommendList= gameServiceImpl.getGameBeans(recommendNames);
         cnt = recommendList.size();
         String[][] recomendArray = new String[cnt][8];
         for (int i=0; i<cnt; i++){
@@ -215,6 +215,7 @@ public class PageController {
             gameArray[i][7] = "/reviews?gameid="+gameServiceImpl.getReviewID(gameArray[i][0]);
         }
         model.addAttribute("gameList", gameArray);
+        model.addAttribute("curUserName", curUserBean.getNickname());
         return "gameSearchPage";
     }
 

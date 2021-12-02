@@ -72,4 +72,12 @@
         FROM Games
         WHERE GameName=#{GameName}
     </select>
+
+    <select id="selectBeanFromName" parameterType="string" resultType="com.example.pt1.bean.GameBean">
+        select *
+        from Games
+        where GameName=#{GameName}
+        order by MetaScore desc
+        limit 1
+    </select>
 </mapper>

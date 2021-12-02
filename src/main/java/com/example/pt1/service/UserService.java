@@ -26,4 +26,6 @@ public interface UserService {
     List<ReviewBean> getReviews(String gameName);
 
     void addReview(int userId, String gameName, int newScore, String newComment);
+
+    List<String> getRecommend(int UserId);
 }

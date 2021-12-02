@@ -31,4 +31,6 @@ public interface GameMapper {
     float getAvgScore(@Param("PageID") int pageID);
 
     float getAvgMetaScore(@Param("GameName") String gameName);
+
+    GameBean selectBeanFromName(@Param("GameName") String tempName);
 }
